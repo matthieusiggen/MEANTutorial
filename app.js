@@ -1,4 +1,15 @@
-var app = angular.module('flapperNews', []);
+var app = angular.module('flapperNews', ['ui.router']);
+
+app.config(['$stateProvider', '$urlRouterProvider', 
+	function($stateProvider, $urlRouterProvider) {
+		$stateProvider.state('home', {
+			url: '/home',
+			templateUrl: '/home.html',
+			controller: 'MainCtrl'
+		});
+		
+		$urlRouterProvider.otherwise('home');
+}]);
 
 app.factory('posts', [function(){
 	var result = {
@@ -14,7 +25,7 @@ app.controller('MainCtrl', [
 	function($scope, posts){
 		$scope.posts = posts.posts;
 		
-		posts.posts.push({title: 'Google', link: 'http://www.google.com', upvotes: 1});
+		$scope.posts.push({title: 'Google', link: 'http://www.google.com', upvotes: 1});
 		/*posts.posts = [
 			{title: 'post 1', upvotes: 5},
 			{title: 'post 2', upvotes: 2},
